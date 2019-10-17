@@ -53,7 +53,7 @@ class Rectangle(object):
 
         print("\nИзображение прямоугольника:\n")
 
-        if (filled):
+        if filled:
             for i in range(self.h):
                 for j in range(self.w):
                     print("#", end = '')
