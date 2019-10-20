@@ -1,7 +1,8 @@
 from T1.rectangle import Rectangle # Задание #1
-from T2.show_file_info import show_file_info # Задание 2
-from T3.sort_rows import sort_rows # Задание 3
-from T4.rfraction import Rfraction # Задание 4
+from T2.show_file_info import show_file_info # Задание #2
+from T3.sort_rows import sort_rows # Задание #3
+from T4.rfraction import Rfraction # Задание #4
+from T5.get_nth_prime import get_nth_prime # Задание #5
 
 # Задание #1
 print("\nЗадание #1\n")
@@ -66,3 +67,7 @@ print("\nДеление дробей:")
 c = a / b
 c.show()
 
+# Задание #5
+print("\nЗадание #5\n")
+
+print("Просто число под номером 5:", get_nth_prime(5))
