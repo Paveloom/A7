@@ -1,6 +1,7 @@
 from T1.rectangle import Rectangle # Задание #1
 from T2.show_file_info import show_file_info # Задание 2
 from T3.sort_rows import sort_rows # Задание 3
+from T4.rfraction import Rfraction # Задание 4
 
 # Задание #1
 print("\nЗадание #1\n")
@@ -33,4 +34,35 @@ show_file_info("./T2/text")
 ## Вызов метода для сортировки строк в файле
 sort_rows("./T3/in", "./T3/out")
 
+# Задание #4
+print("\nЗадание #4\n")
+
+## Инициализация объекта
+a = Rfraction(2, 12)
+b = Rfraction(2, 5)
+
+## Вывод дробей в консоль
+print("Дроби a и b:")
+a.show()
+b.show()
+
+## Сложение дробей
+print("\nСложение дробей:")
+c = a + b
+c.show()
+
+## Вычитание дробей
+print("\nВычитание дробей:")
+c = a - b
+c.show()
+
+## Умножение дробей
+print("\nУмножение дробей:")
+c = a * b
+c.show()
+
+## Деление дробей
+print("\nДеление дробей:")
+c = a / b
+c.show()
 
