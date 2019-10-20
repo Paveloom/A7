@@ -1,3 +1,5 @@
+from math import sqrt
+
 def get_nth_prime(n):
     '''
     Функция, возвращающая n-ое просто число
@@ -14,13 +16,21 @@ def get_nth_prime(n):
     # Проверка вплоть до n-го числа
     while len(l) < n:
 
+        # Верхняя граница потенциальных делителей
+        pmax = sqrt(num)
+
         # Проверка, делится ли число на предыдущие простые числа
         for p in l:
-            if num % p == 0:
+
+            # Проверка, не превысил ли делитель верхнюю границу
+            if p > pmax:
+
+                l.append(num)
                 break
 
-        else:
-            l.append(num)
+            elif num % p == 0:
+
+                break
 
         # Переход к следующему нечетному числу
         num += 2
