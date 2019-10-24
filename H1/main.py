@@ -3,6 +3,7 @@ from T2.show_file_info import show_file_info # Задание #2
 from T3.sort_rows import sort_rows # Задание #3
 from T4.rfraction import Rfraction # Задание #4
 from T5.get_nth_prime import get_nth_prime # Задание #5
+from T6.top_5_words import show_top_5_words # Задание #6
 
 # Задание #1
 print("\nЗадание #1\n")
@@ -72,3 +73,9 @@ print("\nЗадание #5\n")
 
 n = 25
 print("Просто число под номером", n, ":", get_nth_prime(n))
+
+# Задание #6
+print("\nЗадание #6\n")
+
+show_top_5_words("./T6/text")
+
