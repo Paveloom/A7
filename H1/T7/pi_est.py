@@ -26,4 +26,5 @@ def est_pi(N):
         else:
             ib += 2
 
+    # Вывод результата
     return a / b * 2
