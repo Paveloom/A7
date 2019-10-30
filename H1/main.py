@@ -1,10 +1,10 @@
-from T1.rectangle import Rectangle # Проблема #1
-from T2.show_file_info import show_file_info # Проблема #2
-from T3.sort_rows import sort_rows # Проблема #3
-from T4.rfraction import Rfraction # Проблема #4
-from T5.get_nth_prime import get_nth_prime # Проблема #5
-from T6.top_5_words import show_top_5_words # Проблема #6
-from T7.pi_est import est_pi # Проблема 7
+from P1.rectangle import Rectangle # Проблема #1
+from P2.show_file_info import show_file_info # Проблема #2
+from P3.sort_rows import sort_rows # Проблема #3
+from P4.rfraction import Rfraction # Проблема #4
+from P5.get_nth_prime import get_nth_prime # Проблема #5
+from P6.top_5_words import show_top_5_words # Проблема #6
+from P7.pi_est import est_pi # Проблема 7
 
 # Проблема #1
 print("\nПроблема #1\n")
@@ -29,13 +29,13 @@ a.draw(filled = False)
 print("\n\nПроблема #2\n")
 
 ## Вывод информации о файле
-show_file_info("./T2/text")
+show_file_info("./P2/text")
 
 
 # Проблема #3
 
 ## Вызов метода для сортировки строк в файле
-sort_rows("./T3/in", "./T3/out")
+sort_rows("./P3/in", "./P3/out")
 
 # Проблема #4
 print("\nПроблема #4\n")
@@ -78,7 +78,7 @@ print("Просто число под номером", n, ":", get_nth_prime(n))
 # Проблема #6
 print("\nПроблема #6\n")
 
-show_top_5_words("./T6/text")
+show_top_5_words("./P6/text")
 
 # Проблема #7
 print("\nПроблема #7\n")
