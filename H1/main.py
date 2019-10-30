@@ -1,12 +1,13 @@
-from T1.rectangle import Rectangle # Задание #1
-from T2.show_file_info import show_file_info # Задание #2
-from T3.sort_rows import sort_rows # Задание #3
-from T4.rfraction import Rfraction # Задание #4
-from T5.get_nth_prime import get_nth_prime # Задание #5
-from T6.top_5_words import show_top_5_words # Задание #6
+from T1.rectangle import Rectangle # Проблема #1
+from T2.show_file_info import show_file_info # Проблема #2
+from T3.sort_rows import sort_rows # Проблема #3
+from T4.rfraction import Rfraction # Проблема #4
+from T5.get_nth_prime import get_nth_prime # Проблема #5
+from T6.top_5_words import show_top_5_words # Проблема #6
+from T7.pi_est import est_pi # Проблема 7
 
-# Задание #1
-print("\nЗадание #1\n")
+# Проблема #1
+print("\nПроблема #1\n")
 
 ## Инициализация объекта
 a = Rectangle(14, 5)
@@ -24,20 +25,20 @@ a.per_print()
 a.draw(filled = False)
 
 
-# Задание #2
-print("\n\nЗадание #2\n")
+# Проблема #2
+print("\n\nПроблема #2\n")
 
 ## Вывод информации о файле
 show_file_info("./T2/text")
 
 
-# Задание #3
+# Проблема #3
 
 ## Вызов метода для сортировки строк в файле
 sort_rows("./T3/in", "./T3/out")
 
-# Задание #4
-print("\nЗадание #4\n")
+# Проблема #4
+print("\nПроблема #4\n")
 
 ## Инициализация объекта
 a = Rfraction(2, 12)
@@ -68,14 +69,23 @@ print("\nДеление дробей:")
 c = a / b
 c.show()
 
-# Задание #5
-print("\nЗадание #5\n")
+# Проблема #5
+print("\nПроблема #5\n")
 
 n = 25
 print("Просто число под номером", n, ":", get_nth_prime(n))
 
-# Задание #6
-print("\nЗадание #6\n")
+# Проблема #6
+print("\nПроблема #6\n")
 
 show_top_5_words("./T6/text")
 
+# Проблема #7
+print("\nПроблема #7\n")
+
+N = 60000
+dN = 10000
+
+print("     N | pi     ")
+for i in range(1, N, dN):
+    print('%6d   %e' % (i, est_pi(i)))
