@@ -1,9 +1,8 @@
 """ Скрипт, демонстрирующий реализацию игры «Жизнь» """
 
-import game  # Игровые механики
+from game import Board  # Класс доски
+import starters as st  # Стартовые функции
+
 
 # Создание доски
-board = game.create_board(5)
-
-# Задание первого поколения
-board[2, 1:4] = True
+board = Board(5)
