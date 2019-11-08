@@ -18,23 +18,28 @@ class Board(object):
 
     """
 
-    def __init__(self, n: int, m: int = 0):
+    def __init__(self, n: int, m: int = 0, starter=None):
         """
         Конструктор
         :param n: Число строк досок
         :param m: Число столбцов досок
+        :param starter: Стартовая функция
         """
-        if not m:
-            self.b1 = np.ascontiguousarray(np.zeros(shape=(n, n), dtype=bool))
-        else:
+
+        if m:
             self.b1 = np.ascontiguousarray(np.zeros(shape=(n, m), dtype=bool))
+            if starter:
+                starter(self.b1)
+        else:
+            self.b1 = np.ascontiguousarray(np.zeros(shape=(n, n), dtype=bool))
+            if starter:
+                starter(self.b1)
 
         self.b2 = self.b1
         self.switch = False
 
-    def evolve(self, iters):
+    def evolve(self, iters: int):
         """
          Метод, получающий следующие поколения в смежных досках
         :param iters: Число итераций
         """
-
