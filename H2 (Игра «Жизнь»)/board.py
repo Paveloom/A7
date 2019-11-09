@@ -65,13 +65,17 @@ class Board(object):
         :param iters: Число итераций
         """
 
+        # Вычисление вспомогательных переменных
+        nm1 = self.n - 1
+        mm1 = self.m - 1
+
         for _ in range(iters):
 
             # Текущая доска — b2
             if self.switch:
 
                 # Выполнение перехода от одного поколения к следующему
-                ms.evolution_step(self.b2, self.b1, self.n, self.m)
+                ms.evolution_step(self.b2, self.b1, nm1, mm1)
 
                 # Переключение текущей доски
                 self.switch = not self.switch
@@ -80,7 +84,7 @@ class Board(object):
             else:
 
                 # Выполнение перехода от одного поколения к следующему
-                ms.evolution_step(self.b1, self.b2, self.n, self.m)
+                ms.evolution_step(self.b1, self.b2, nm1, mm1)
 
                 # Переключение текущей доски
                 self.switch = not self.switch

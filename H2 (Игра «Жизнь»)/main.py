@@ -5,7 +5,7 @@ import starters as st  # Стартовые функции
 
 
 # Создание доски
-board = Board(5, 5, starter=st.blinker)
+board = Board(5, 5, starter=st.test)
 
 board.evolve(2)
 
