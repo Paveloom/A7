@@ -62,14 +62,16 @@ class Board(object):
         # логической переменной
         self.switch = False
 
-    def evolve(self, iters: int = 1):
+    def evolve(self, iters: int = 1, sleep_time: int = 1):
         """
          Метод, получающий следующие поколения в смежных досках
         :param iters: Число итераций
+        :param sleep_time: Время, выделенное на паузу между сменами поколений
         """
 
-        # Определение времени на паузу
-        sleep_time = 1
+        # Изменение максимальной длины элементов
+        # в строке при выводе матрицы
+        np.set_printoptions(linewidth=np.inf)
 
         # Определение команды на очистку терминала
         if platform == "win32":
@@ -83,9 +85,9 @@ class Board(object):
 
         os.system(clear_cmd)
         if self.switch:
-            print("\n%s" % str(self.b2).replace("False", "0").replace(" True", "1"))
+            print(str(self.b2).replace("False", "·").replace(" True", "*"))
         else:
-            print("\n%s" % str(self.b1).replace("False", "0").replace(" True", "1"))
+            print(str(self.b1).replace("False", "·").replace(" True", "*"))
         sleep(sleep_time)
 
         # Вычисление вспомогательных переменных
@@ -103,8 +105,10 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
+                # Вывод текущей доски с замещением
+
                 os.system(clear_cmd)
-                print("\n" + str(self.b1).replace("False", "0").replace(" True", "1"))
+                print("\n" + str(self.b1).replace("False", "·").replace(" True", "*"))
                 sleep(sleep_time)
 
             # Текущая доска — b1
@@ -116,8 +120,10 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
+                # Вывод текущей доски с замещением
+
                 os.system(clear_cmd)
-                print("\n" + str(self.b2).replace("False", "0").replace(" True", "1"))
+                print("\n" + str(self.b2).replace("False", "·").replace(" True", "*"))
                 sleep(sleep_time)
 
         print()
