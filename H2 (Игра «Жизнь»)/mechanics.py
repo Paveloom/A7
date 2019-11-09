@@ -17,29 +17,50 @@ def evolution_step(bcur: np.ndarray, bnext: np.ndarray, nm1: int, mm1: int):
     for i in range(1, nm1):
         for j in range(1, mm1):
 
-            # Подсчет числа живых соседей
+            # Подсчет числа живых соседей у клеток во
+            # внутреннем прямоугольнике
             count = count_alive_neighbors_inside(bcur, i, j)
 
             # Выполнение правил:
             apply_rules(bcur, bnext, count, i, j)
 
-    # Проход по левой грани (без углов; 5 соседей)
+    # Проход по боковым граням (без углов; 5 соседей)
     for i in range(1, nm1):
 
-        # Подсчет числа живых соседей на левой грани
+        # Проход по левой грани
+
+        # Подсчет числа живых соседей у клеток на левой грани
         count = count_alive_neighbors_left(bcur, i)
 
         # Выполнение правил
         apply_rules(bcur, bnext, count, i, 0)
 
-    # Проход по правой грани (без углов; 5 соседей)
-    for i in range(1, nm1):
+        # Проход по правой грани
 
-        # Подсчет числа живых соседей на правой грани
+        # Подсчет числа живых соседей у клеток на правой грани
         count = count_alive_neighbors_right(bcur, i, mm1)
 
         # Выполнение правил
         apply_rules(bcur, bnext, count, i, mm1)
+
+    # Проход по верхней и нижней граням доски (без углов; 5 соседей)
+    for j in range(1, mm1):
+
+        # Проход по верхней грани
+
+        # Подсчет числа живых соседей у клеток на верхней грани
+        count = count_alive_neighbors_top(bcur, j)
+
+        # Выполнение правил
+        apply_rules(bcur, bnext, count, 0, j)
+
+        # Проход по нижней грани
+
+        # Подсчет числа живых соседей у клеток на нижней грани
+        count = count_alive_neighbors_bottom(bcur, j, nm1)
+
+        # Выполнение правил
+        apply_rules(bcur, bnext, count, nm1, j)
 
 
 def count_alive_neighbors_inside(matrix: np.ndarray, i: int, j: int):
@@ -125,6 +146,61 @@ def count_alive_neighbors_right(matrix: np.ndarray, i: int, mm1: int):
         count += 1
 
     if matrix[i + 1, mm1]:
+        count += 1
+
+    return count
+
+
+def count_alive_neighbors_top(matrix: np.ndarray, j: int):
+    """
+    Функция, возвращающая число живых соседей текущей клетки,
+    расположенной на верхней грани
+    :param matrix: Текущая доска
+    :param j: Индекс столбца текущей клетки
+    :return: Число живых соседей
+    """
+
+    count = 0
+
+    # Проход по соседям снизу
+    for k in range(3):
+        if matrix[1, j - 1 + k]:
+            count += 1
+
+    # Проход по соседям сбоку
+
+    if matrix[0, j - 1]:
+        count += 1
+
+    if matrix[0, j + 1]:
+        count += 1
+
+    return count
+
+
+def count_alive_neighbors_bottom(matrix: np.ndarray, j: int, nm1: int):
+    """
+    Функция, возвращающая число живых соседей текущей клетки,
+    расположенной на верхней грани
+    :param matrix: Текущая доска
+    :param j: Индекс столбца текущей клетки
+    :param nm1: Число строк доски - 1
+    :return: Число живых соседей
+    """
+
+    count = 0
+
+    # Проход по соседям сверху
+    for k in range(3):
+        if matrix[nm1 - 1, j - 1 + k]:
+            count += 1
+
+    # Проход по соседям сбоку
+
+    if matrix[nm1, j - 1]:
+        count += 1
+
+    if matrix[nm1, j + 1]:
         count += 1
 
     return count
