@@ -1,7 +1,10 @@
 """ Модуль, содержащий класс Board """
 
 import numpy as np
+import os
+import sys
 import mechanics as ms
+from time import sleep
 
 
 class Board(object):
@@ -65,6 +68,17 @@ class Board(object):
         :param iters: Число итераций
         """
 
+        sleep_time = 1
+
+        # Вывод начального поколения
+
+        os.system("clear")
+        if self.switch:
+            print("\n%s" % str(self.b2).replace("False", "0").replace(" True", "1"))
+        else:
+            print("\n%s" % str(self.b1).replace("False", "0").replace(" True", "1"))
+        sleep(sleep_time)
+
         # Вычисление вспомогательных переменных
         nm1 = self.n - 1
         mm1 = self.m - 1
@@ -80,6 +94,10 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
+                os.system("clear")
+                print("\n" + str(self.b1).replace("False", "0").replace(" True", "1"))
+                sleep(sleep_time)
+
             # Текущая доска — b1
             else:
 
@@ -89,6 +107,12 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
+                os.system("clear")
+                print("\n" + str(self.b2).replace("False", "0").replace(" True", "1"))
+                sleep(sleep_time)
+
+        print()
+
     def print(self):
         """ Метод для вывода текущей доски """
 
@@ -97,5 +121,5 @@ class Board(object):
 
         else:
             print(self.b1)
-
+            
         print()
