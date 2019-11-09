@@ -89,3 +89,13 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
+    def print(self):
+        """ Метод для вывода текущей доски """
+
+        if self.switch:
+            print(self.b2)
+
+        else:
+            print(self.b1)
+
+        print()

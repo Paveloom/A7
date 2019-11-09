@@ -345,9 +345,13 @@ def apply_rules(bcur: np.ndarray, bnext: np.ndarray, count: int, i: int, j: int)
 
     # Если клетка живая
     if bcur[i, j]:
-        if count not in range(2, 4):
+        if count in range(2, 4):
+            bnext[i, j] = True
+        else:
             bnext[i, j] = False
     # Если клетка мертвая
     else:
         if count == 3:
             bnext[i, j] = True
+        else:
+            bnext[i, j] = False

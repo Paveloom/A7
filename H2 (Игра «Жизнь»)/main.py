@@ -5,8 +5,10 @@ import starters as st  # Стартовые функции
 
 
 # Создание доски
-board = Board(5, 5, starter=st.test)
+board = Board(5, 5, starter=st.blinker)
 
-board.evolve(2)
+board.print()
 
-print(board.b1)
+board.evolve(300)
+
+board.print()
