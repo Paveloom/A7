@@ -1,6 +1,7 @@
-""" Модуль, описывающий игровые механики игры «Жизнь» """
+""" Модуль, содержащий класс Board """
 
 import numpy as np
+import mechanics as ms
 
 
 class Board(object):
@@ -66,71 +67,21 @@ class Board(object):
 
         for _ in range(iters):
 
-            if not self.switch:
+            # Текущая доска — b2
+            if self.switch:
 
-                # Проход по внутреннему прямоугольнику (8 соседей)
-                for i in range(1, self.n - 1):
-                    for j in range(1, self.m - 1):
+                # Выполнение перехода от одного поколения к следующему
+                ms.evolution_step(self.b2, self.b1, self.n, self.m)
 
-                        # Подсчет числа живых соседей
-                        count = __count_alive_neighbors__(self.b1, 8, i, j)
+                # Переключение текущей доски
+                self.switch = not self.switch
 
-                        # Выполнение правил:
-                        __apply_rules__(self.b1, self.b2, count, i, j)
+            # Текущая доска — b1
+            else:
 
+                # Выполнение перехода от одного поколения к следующему
+                ms.evolution_step(self.b1, self.b2, self.n, self.m)
 
+                # Переключение текущей доски
+                self.switch = not self.switch
 
-
-def __count_alive_neighbors__(matrix: np.ndarray, num: int, i: int, j: int):
-    """
-    Функция, возвращающая число живых соседей текущей клетки
-    :param num: Число соседей для проверки
-    :param i: Индекс строки текущей клетки
-    :param j: Индекс столбца текущей клетки
-    :return: Число живых соседей
-    """
-
-    if num == 8:  # 8 соседей
-
-        count = 0
-
-        for k in range(3):
-
-            # Проход по соседям сверху
-            if matrix[i - 1, j - 1 + k]:
-                count += 1
-
-            # Проход по соседям снизу
-            if matrix[i + 1, j - 1 + k]:
-                count += 1
-
-        # Проход по соседям сбоку
-
-        if matrix[i, j - 1]:
-            count += 1
-
-        if matrix[i, j + 1]:
-            count += 1
-
-        return count
-
-
-def __apply_rules__(bcur: np.ndarray, bnext: np.ndarray, count: int, i: int, j: int):
-    """
-    Метод, реализующий правила перехода
-    между поколениями для клеток
-    :param bcur: Текущая доска
-    :param bnext: Следующая доска
-    :param count: Число живых соседей
-    :param i: Индекс строки текущей клетки
-    :param j: Индекс столбца текущей клетки
-    """
-
-    # Если клетка живая
-    if bcur[i, j]:
-        if count not in range(2, 4):
-            bnext[i, j] = False
-    # Если клетка мертвая
-    else:
-        if count == 3:
-            bnext[i, j] = True
