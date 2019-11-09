@@ -1,10 +1,10 @@
 """ Модуль, содержащий класс Board """
 
-import numpy as np
-import os
-import sys
-import mechanics as ms
-from time import sleep
+import numpy as np # Матрицы
+import os # Консольные команды
+from sys import platform # Платформа
+import mechanics as ms # Игровые механики
+from time import sleep # Паузы
 
 
 class Board(object):
@@ -68,11 +68,20 @@ class Board(object):
         :param iters: Число итераций
         """
 
+        # Определение времени на паузу
         sleep_time = 1
+
+        # Определение команды на очистку терминала
+        if platform == "win32":
+            clear_cmd = 'cls'
+        elif platform == "linux2" or platform == 'darwin':
+            clear_cmd = 'clear'
+        else:
+            clear_cmd = 'clear'
 
         # Вывод начального поколения
 
-        os.system("clear")
+        os.system(clear_cmd)
         if self.switch:
             print("\n%s" % str(self.b2).replace("False", "0").replace(" True", "1"))
         else:
@@ -94,7 +103,7 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
-                os.system("clear")
+                os.system(clear_cmd)
                 print("\n" + str(self.b1).replace("False", "0").replace(" True", "1"))
                 sleep(sleep_time)
 
@@ -107,7 +116,7 @@ class Board(object):
                 # Переключение текущей доски
                 self.switch = not self.switch
 
-                os.system("clear")
+                os.system(clear_cmd)
                 print("\n" + str(self.b2).replace("False", "0").replace(" True", "1"))
                 sleep(sleep_time)
 
