@@ -5,7 +5,7 @@ import starters as st  # Стартовые функции
 
 
 # Создание доски
-board = Board(17, starter=st.pulsar)
+board = Board(9, 33, starter=st.hwss)
 
 # Вызов эволюции
-board.evolve(120, 0.1)
+board.evolve(60, 0.2)

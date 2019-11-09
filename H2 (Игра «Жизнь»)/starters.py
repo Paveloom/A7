@@ -47,3 +47,12 @@ def pulsar(board: np.ndarray):
 
     board[13:16, 11] = True
     board[13, 10] = True
+
+def hwss(board: np.ndarray):
+    """ Функция, создающая на доске тяжелый космический корабль """
+
+    board[3, 3:9] = True
+    board[4, 2] = board[4, 8] = True
+    board[5, 8] = True
+    board[6, 2] = board[6, 7] = True
+    board[7, 4:6] = True

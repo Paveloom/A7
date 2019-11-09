@@ -62,7 +62,7 @@ class Board(object):
         # логической переменной
         self.switch = False
 
-    def evolve(self, iters: int = 1, sleep_time: int = 1):
+    def evolve(self, iters: int = 1, sleep_time=1):
         """
          Метод, получающий следующие поколения в смежных досках
         :param iters: Число итераций
@@ -85,9 +85,9 @@ class Board(object):
 
         os.system(clear_cmd)
         if self.switch:
-            print(str(self.b2).replace("False", "·").replace(" True", "*"))
+            print("\n" + str(self.b2).replace("False", "·").replace(" True", "*"))
         else:
-            print(str(self.b1).replace("False", "·").replace(" True", "*"))
+            print("\n" + str(self.b1).replace("False", "·").replace(" True", "*"))
         sleep(sleep_time)
 
         # Вычисление вспомогательных переменных
