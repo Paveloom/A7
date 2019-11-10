@@ -1,7 +1,7 @@
 """ Модуль, содержащий методы, описывающие игровые механики """
 
 import numpy as np  # Тип матриц
-import counts as cs  # Функции для подсчета числа живых соседей
+from life import counts as cs  # Функции для подсчета живых соседей
 
 
 def evolution_step(bcur: np.ndarray, bnext: np.ndarray, nm1: int, mm1: int):

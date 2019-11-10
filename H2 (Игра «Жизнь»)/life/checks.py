@@ -3,7 +3,7 @@
 на случаи окончания игры
 """
 
-import numpy as np
+import numpy as np  # Тип матриц
 
 
 def the_board_is_empty(matrix: np.ndarray):

@@ -6,8 +6,8 @@ from sys import platform  # Платформа
 from time import sleep  # Паузы
 from copy import copy  # Копирование
 
-import mechanics as ms  # Игровые механики
-import checks as ck  # Проверки на окончание игры
+from life import checks as ck  # Функции для проверки на окончание игры
+from life import mechanics as ms  # Игровые механики
 
 
 class Board(object):
