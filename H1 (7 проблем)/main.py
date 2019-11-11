@@ -1,10 +1,12 @@
-from P1.rectangle import Rectangle # Проблема #1
-from P2.show_file_info import show_file_info # Проблема #2
-from P3.sort_rows import sort_rows # Проблема #3
-from P4.rfraction import Rfraction # Проблема #4
-from P5.get_nth_prime import get_nth_prime # Проблема #5
-from P6.top_5_words import show_top_5_words # Проблема #6
-from P7.pi_est import est_pi # Проблема 7
+""" Скрипт, демонстрирующий решения для заданных семи проблем """
+
+from P1.rectangle import Rectangle  # Проблема #1
+from P2.show_file_info import show_file_info  # Проблема #2
+from P3.sort_rows import sort_rows  # Проблема #3
+from P4.rfraction import Rfraction  # Проблема #4
+from P5.get_nth_prime import get_nth_prime  # Проблема #5
+from P6.top_5_words import show_top_5_words  # Проблема #6
+from P7.pi_est import est_pi  # Проблема 7
 
 # Проблема #1
 print("\nПроблема #1\n")
@@ -89,3 +91,4 @@ dN = 10000
 print("     N | pi     ")
 for i in range(1, N, dN):
     print('%6d   %e' % (i, est_pi(i)))
+print()
