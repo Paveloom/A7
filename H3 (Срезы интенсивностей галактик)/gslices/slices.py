@@ -11,7 +11,7 @@ import numpy as np  # Работа с массивами
 from matplotlib import pyplot as plt, rcParams as rcP  # Графики
 
 # Значение по умолчанию для isens
-isens_default = 2.5e3
+isens_default = 1.5e3
 
 # Настройки графиков
 
@@ -23,7 +23,7 @@ rcP["font.family"] = "sans"
 rcP["font.sans-serif"] = ["DejaVu Sans"]
 
 
-def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_default):
+def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_default, clean: bool = True):
     """
     Функция для построения вертикальных срезов
     по всем данным, найденным рекурсивно в path_to_data
@@ -36,7 +36,9 @@ def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_defa
                         иерархию файлов, что и path_to_data);
         isens: Вещественное число, указывающее нижний предел
                для интенсивностей, при которых текущий
-               вертикальный срез еще будет считаться значимым.
+               вертикальный срез еще будет считаться значимым;
+        clean: Логическая переменная, отвечающая за удаление
+               предыдущих результатов для найденных файлов
     """
 
     # Рекурсивный проход по всем данным в path_to_data
@@ -47,10 +49,11 @@ def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_defa
             if file.lower().endswith(".fits"):
 
                 # Вызов функции для работы с этим файлом
-                slice_file(path_to_data, os.path.join(cur, file)[len(path_to_data) + 1:], path_to_output, isens)
+                slice_file(path_to_data, os.path.join(cur, file)[len(path_to_data) + 1:], path_to_output, isens, clean)
 
 
-def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens: float = isens_default):
+def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens: float = isens_default,
+               clean: bool = True):
     """
     Функция для построения вертикального среза
     по данным из файла path_to_file
@@ -63,7 +66,9 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
                         где будут храниться результаты;
         isens: Вещественное число, указывающее нижний предел
                для интенсивностей, при которой текущий
-               вертикальный срез еще будет считаться значимым.
+               вертикальный срез еще будет считаться значимым;
+        clean: Логическая переменная, отвечающая за удаление
+               предыдущих результатов для текущего файла
     """
 
     # Сборка пути к зеркальной
@@ -76,6 +81,13 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
 
     if not os.path.isdir(path_to_output_directory):
         os.makedirs(path_to_output_directory)
+
+    # Удаление результатов предыдущего
+    # пропуска для этого файла
+    elif clean:
+        for cur, folders, files in os.walk(path_to_output_directory):
+            for file in files:
+                os.remove(os.path.join(cur, file))
 
     # Считывание данных из файла
     f = fitsio.read(os.path.join(path_to_data, path_to_file))
