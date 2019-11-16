@@ -22,7 +22,7 @@ sl.slice_data("data/130", "output/130",
 sl.slice_data("data/149", "output/149", isens=400)
 
 # Получение результатов для data/216
-sl.slice_data("data/216", "output/216")
+sl.slice_data("data/216", "output/216", isens=1100)
 
 # Получение результатов для data/236
 sl.slice_data("data/236", "output/236")

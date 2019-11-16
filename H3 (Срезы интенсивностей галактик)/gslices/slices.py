@@ -20,7 +20,7 @@ isens_default = 1.5e3
 rcP["savefig.dpi"] = 300
 rcP["figure.dpi"] = 300
 
-rcP["font.size"] = 16
+rcP["font.size"] = 13
 rcP["legend.fontsize"] = 10
 rcP["font.family"] = "sans"
 rcP["font.sans-serif"] = ["DejaVu Sans"]
@@ -186,8 +186,11 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
     # Получение числа зависимых параметров функции fit_function
     params_num = len(signature(fit_function).parameters) - 1
 
+    # Определение длины списка индексов значимых срезов
+    imp_inds_len = len(imp_inds)
+
     # Создание массива параметров
-    params = np.zeros((len(imp_inds), params_num))
+    params = np.zeros((imp_inds_len, params_num))
 
     # Обнуление вспомогательной переменной
     k = 0
@@ -225,4 +228,34 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
         plt.savefig(os.path.join(path_to_output_directory, str(j + 1)), bbox_inches="tight")
 
         # Очистка графика
-        plt.clf()
+        plt.close()
+
+    # Построение полотна для подграфиков
+    fig, axes = plt.subplots(params_num, sharex="col")
+
+    # Построение графиков параметров по всем срезам
+    for m in range(params_num):
+        axes[m].plot(range(1, imp_inds_len + 1), params[:, m], color="orange", label="Параметр #" + str(m + 1))
+        axes[m].legend()
+
+    # Получение индексов значимых
+    # срезов в виде списка строк
+
+    imp_inds_str = []
+    for k in range(imp_inds_len):
+        imp_inds_str.append(str(imp_inds[k]))
+
+    # Изменение меток для значений абсциссы
+    axes[-1].set_xticklabels(imp_inds_str)
+
+    # Добавление заголовка
+    axes[0].set_title("Мастер-график по всем срезам")
+
+    # Добавление названия абсциссы
+    axes[-1].set_xlabel("Номер вертикального среза")
+
+    # Сохранение графика
+    fig.savefig(os.path.join(path_to_output_directory, "master"), bbox_inches="tight")
+
+    # Освобождение памяти из-под фигуры
+    plt.close(fig)
