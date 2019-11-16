@@ -3,14 +3,9 @@
 срезов по изображениям галактик
 """
 
-import time  # Время выполнения скрипта
-
 from gslices import clear as cl  # Удаления содержимого указанной папки
 from gslices import slices as sl  # Вертикальные срезы
 from gslices import dgaussian as dg  # Двойная функция Гаусса
-
-# Включение таймера
-start = time.time()
 
 # Удаления содержимого указанной папки
 cl.clear_dir("output")
@@ -48,9 +43,3 @@ sl.slice_data("data/305", "output/305")
 
 # Получение результатов для data/325
 sl.slice_data("data/325", "output/325")
-
-# Выключение таймера
-end = time.time()
-
-# Вывод времени выполнения скрипта
-print("Время выполнения: " + str(end - start))
