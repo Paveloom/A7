@@ -33,7 +33,7 @@ def fit_function_default(x, a, b, c):
     (функция Гаусса)
 
     Параметры:
-        a, b, c: Параметры функции Гаусса
+        a, b, c: Параметры функции Гаусса.
     """
 
     # Получение результата функции
@@ -46,7 +46,7 @@ def supportive_fit_function_default(x: np.ndarray, params: np.ndarray):
     по умолчанию (функция Гаусса)
 
     Параметры:
-        params: Параметры функции Гаусса
+        params: Параметры функции Гаусса.
     """
 
     # Создание массива
@@ -73,7 +73,7 @@ def get_priors_default(x: np.ndarray, y: np.ndarray):
     return [y.max(), len(x) / 2, len(x) / 4]
 
 
-def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_default, clean: bool = True,
+def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_default, clean: bool = False,
                fit_function=fit_function_default, supportive_fit_function=supportive_fit_function_default,
                priors_function=get_priors_default):
     """
@@ -113,7 +113,7 @@ def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_defa
 
 
 def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens: float = isens_default,
-               clean: bool = True, fit_function=fit_function_default,
+               clean: bool = False, fit_function=fit_function_default,
                supportive_fit_function=supportive_fit_function_default, priors_function=get_priors_default):
     """
     Функция для построения вертикального среза
