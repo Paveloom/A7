@@ -60,8 +60,22 @@ def supportive_fit_function_default(x: np.ndarray, params: np.ndarray):
     return result
 
 
+#  Значение по умолчанию для списка начальных параметров
+def get_priors_default(x: np.ndarray, y: np.ndarray):
+    """
+    Функция по умолчанию для получения начальных значений
+
+    Параметры:
+        x: Массив аргументов;
+        y: Массив значений функции.
+    """
+
+    return [y.max(), len(x) / 2, len(x) / 4]
+
+
 def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_default, clean: bool = True,
-               fit_function=fit_function_default, supportive_fit_function=supportive_fit_function_default):
+               fit_function=fit_function_default, supportive_fit_function=supportive_fit_function_default,
+               priors_function=get_priors_default):
     """
     Функция для построения вертикальных срезов
     по всем данным, найденным рекурсивно в path_to_data
@@ -81,7 +95,9 @@ def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_defa
                       которая будет вписана.
         supportive_fit_function: Вспомогательная функция,
                                  описывающая кривую,
-                                 которая будет вписана.
+                                 которая будет вписана;
+        priors_function: Функция для получения начальных
+                         значений для заданной функции.
     """
 
     # Рекурсивный проход по всем данным в path_to_data
@@ -93,12 +109,12 @@ def slice_data(path_to_data: str, path_to_output: str, isens: float = isens_defa
 
                 # Вызов функции для работы с этим файлом
                 slice_file(path_to_data, os.path.join(cur, file)[len(path_to_data) + 1:], path_to_output, isens, clean,
-                           fit_function, supportive_fit_function)
+                           fit_function, supportive_fit_function, priors_function)
 
 
 def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens: float = isens_default,
                clean: bool = True, fit_function=fit_function_default,
-               supportive_fit_function=supportive_fit_function_default):
+               supportive_fit_function=supportive_fit_function_default, priors_function=get_priors_default):
     """
     Функция для построения вертикального среза
     по данным из файла path_to_file
@@ -118,7 +134,9 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
                       которая будет вписана;
         supportive_fit_function: Вспомогательная функция,
                                  описывающая кривую,
-                                 которая будет вписана.
+                                 которая будет вписана;
+        priors_function: Функция для получения начальных
+                         значений для заданной функции.
     """
 
     # Сборка пути к зеркальной
@@ -149,7 +167,7 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
     rows_num = len(f[:, 0])
 
     # Получения массива из индексов строк
-    rows_ind = np.r_[1:rows_num + 1]
+    rows_inds = np.r_[1:rows_num + 1]
 
     # Определение списка индексов значимых срезов
     imp_inds = []
@@ -179,7 +197,7 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
     for j in imp_inds:
 
         # Вписывание функции
-        fit_params = so.curve_fit(fit_function, rows_ind, f[:, j])
+        fit_params = so.curve_fit(fit_function, rows_inds, f[:, j], p0=priors_function(rows_inds, f[:, j]))
 
         # Добавление полученных параметров к общему массиву
         params[k, :] = fit_params[0]
@@ -188,10 +206,10 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
         k += 1
 
         # Построение графика среза
-        plt.plot(rows_ind, f[:, j], label="Данные")
+        plt.plot(rows_inds, f[:, j], label="Данные")
 
         # Построение графика вписанной функции
-        plt.plot(rows_ind, supportive_fit_function(rows_ind, fit_params[0]), label="Вписанная функция")
+        plt.plot(rows_inds, supportive_fit_function(rows_inds, fit_params[0]), label="Вписанная функция")
 
         # Добавление легенды
         plt.legend(loc="upper right")
