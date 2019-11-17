@@ -25,7 +25,7 @@ sl.slice_data("data/149", "output/149", isens=400)
 sl.slice_data("data/216", "output/216", isens=1100)
 
 # Получение результатов для data/236
-sl.slice_data("data/236", "output/236")
+sl.slice_data("data/236", "output/236", isens=1300)
 
 # Получение результатов для data/274
 sl.slice_data("data/274", "output/274",
@@ -39,7 +39,9 @@ sl.slice_data("data/283", "output/283")
 sl.slice_data("data/305", "output/305")
 
 # Получение результатов для data/305
-sl.slice_data("data/305", "output/305")
+sl.slice_data("data/305", "output/305",
+              fit_function=dg.double_gaussian, supportive_fit_function=dg.s_double_gaussian,
+              priors_function=dg.p_double_gaussian_305)
 
 # Получение результатов для data/325
 sl.slice_data("data/325", "output/325")

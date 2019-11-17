@@ -6,7 +6,6 @@
 import numpy as np  # Работа с массивами
 
 
-# Определение функции для вписывания по умолчанию
 def double_gaussian(x, a, b, c, d, e, f):
     """
     Функция, представляющая собой
@@ -43,7 +42,6 @@ def s_double_gaussian(x: np.ndarray, params: np.ndarray):
     return result
 
 
-#  Значение по умолчанию для списка начальных параметров
 def p_double_gaussian(x: np.ndarray, y: np.ndarray):
     """
     Функция для получения начальных значений
@@ -59,6 +57,27 @@ def p_double_gaussian(x: np.ndarray, y: np.ndarray):
 
     la = len(x) / 4
     lb = 3 * la
+    ma = y.max()
+
+    return [ma, la, 1, ma, lb, 1]
+
+
+def p_double_gaussian_305(x: np.ndarray, y: np.ndarray):
+    """
+    Функция для получения начальных значений
+    для функции, представляющей собой
+    сумму двух функций Гаусса
+    (вариант для data/305)
+
+    Параметры:
+        x: Массив аргументов;
+        y: Массив значений функции.
+    """
+
+    # Вычисление вспомогательных переменных
+
+    la = len(x) / 2
+    lb = len(x) * 7 / 8
     ma = y.max()
 
     return [ma, la, 1, ma, lb, 1]

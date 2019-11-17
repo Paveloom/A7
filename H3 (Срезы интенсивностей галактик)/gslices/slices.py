@@ -246,10 +246,18 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
 
     imp_inds_str = []
     for k in range(imp_inds_len):
-        imp_inds_str.append(str(imp_inds[k]))
+        imp_inds_str.append(str(imp_inds[k] + 1))
 
     # Изменение меток для значений абсциссы
-    axes[-1].set_xticklabels(imp_inds_str)
+    if imp_inds_len < 10:
+        axes[-1].set_xticks(np.arange(1, imp_inds_len + 1, 1))
+        axes[-1].set_xticklabels(imp_inds_str)
+    elif 10 <= imp_inds_len < 22:
+        axes[-1].set_xticks(np.arange(1, imp_inds_len + 1, 2))
+        axes[-1].set_xticklabels(imp_inds_str[::2])
+    else:
+        axes[-1].set_xticks(np.arange(1, imp_inds_len + 1, 4))
+        axes[-1].set_xticklabels(imp_inds_str[::4])
 
     # Добавление заголовка
     axes[0].set_title("Мастер-график по всем срезам")
