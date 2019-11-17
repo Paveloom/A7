@@ -183,8 +183,11 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
         # среза к списку индексов значимых срезов
         imp_inds.append(j)
 
+    # Получение параметров в виде листа строк
+    params_str = str(signature(fit_function)).replace("(", "").replace(")", "").replace(",", "").split()[1:]
+
     # Получение числа зависимых параметров функции fit_function
-    params_num = len(signature(fit_function).parameters) - 1
+    params_num = len(params_str)
 
     # Определение длины списка индексов значимых срезов
     imp_inds_len = len(imp_inds)
@@ -235,7 +238,7 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
 
     # Построение графиков параметров по всем срезам
     for m in range(params_num):
-        axes[m].plot(range(1, imp_inds_len + 1), params[:, m], color="orange", label="Параметр #" + str(m + 1))
+        axes[m].plot(range(1, imp_inds_len + 1), params[:, m], color="orange", label="Параметр " + params_str[m])
         axes[m].legend()
 
     # Получение индексов значимых
