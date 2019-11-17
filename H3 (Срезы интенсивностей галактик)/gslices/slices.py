@@ -249,6 +249,7 @@ def slice_file(path_to_data: str, path_to_file: str, path_to_output: str, isens:
         imp_inds_str.append(str(imp_inds[k] + 1))
 
     # Изменение меток для значений абсциссы
+
     if imp_inds_len < 10:
         axes[-1].set_xticks(np.arange(1, imp_inds_len + 1, 1))
         axes[-1].set_xticklabels(imp_inds_str)
