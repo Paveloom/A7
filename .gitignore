@@ -1,2 +1,8 @@
+# Персональный Makefile
+Makefile
+
+# Директория проекта PyCharm
 .idea/
+
+# Байт-код
 *pyc
